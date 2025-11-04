@@ -1,78 +1,78 @@
-# MERN Stack Integration Assignment
+# MERN Blog Project
+## Overview
+This is a full-stack blogging platform built using the MERN (MongoDB, Express, React, Node.js) stack. It features robust user authentication, CRUD operations for blog posts and categories, dynamic filtering/pagination, and secure image uploading.
 
-This assignment focuses on building a full-stack MERN (MongoDB, Express.js, React.js, Node.js) application that demonstrates seamless integration between front-end and back-end components.
+## Key Features   
+User Management (Authentication): Secure registration, login, and logout using JSON Web Tokens (JWT) stored in HTTP-only cookies.
+- Role-Based Content: Only authenticated users can create, edit, and delete their own posts.
+- Post Management (CRUD): Create, Read, Update, and Delete blog posts.
+- Category Management: Posts can be assigned to different categories, which are manageable via the backend.
+-Image Uploads: Secure handling of file uploads for featured images using Multer.
+- Dynamic Filtering/Search: Filter posts by category or search by keywords in the title/content.
+- Pagination: Efficiently loads posts, handling large datasets by splitting them into pages.
+- Responsive Design: Built with Tailwind CSS for a modern, mobile-friendly interface.
 
-## Assignment Overview
+## API Documentation
+The backend API is the core of the application, serving data to the client. All API routes are prefixed with /api
 
-You will build a blog application with the following features:
-1. RESTful API with Express.js and MongoDB
-2. React front-end with component architecture
-3. Full CRUD functionality for blog posts
-4. User authentication and authorization
-5. Advanced features like image uploads and comments
+|Route            |Method|Description                                        |Access             |Body/Params                            |
+|-----------------|------|---------------------------------------------------|-------------------|---------------------------------------|
+|/api/users       |POST  |Register a new user.                               |Public             |name, email, password                  |
+|/api/users/login |POST  |Authenticate a user and get a JWT cookie.          |Public             |email, password                        |
+|/api/users/logout|POST  |Clear the JWT cookie and log out.                  |Private            |None                                   |
+|/api/posts       |GET   |Fetch all posts with optional filtering/pagination.|Public             |Query: keyword, category, pageNumber   |
+|/api/posts/:id   |GET   |Fetch a single post by ID.                         |Public             |Param: id                              |
+|/api/posts       |POST  |Create a new post.                                 |Private            |title, content, category, featuredImage|
+|/api/posts/:id   |PUT   |Update an existing post (must be user's own).      |Private            |Param: id. Body: Post fields.          |
+|/api/posts/:id   |DELETE|Delete a post (must be user's own).                |Private            |Param: id                              |
+|/api/categories  |GET   |Fetch all categories.                              |Public             |None                                   |
+|/api/categories  |POST  |Create a new category.                             |Private (Admin/Dev)|name                                   |
+|/api/upload      |POST  |Upload a featured image file.                      |Private            |image (Multipart Form Data)            |
 
-## Project Structure
 
-```
-mern-blog/
-├── client/                 # React front-end
-│   ├── public/             # Static files
-│   ├── src/                # React source code
-│   │   ├── components/     # Reusable components
-│   │   ├── pages/          # Page components
-│   │   ├── hooks/          # Custom React hooks
-│   │   ├── services/       # API services
-│   │   ├── context/        # React context providers
-│   │   └── App.jsx         # Main application component
-│   └── package.json        # Client dependencies
-├── server/                 # Express.js back-end
-│   ├── config/             # Configuration files
-│   ├── controllers/        # Route controllers
-│   ├── models/             # Mongoose models
-│   ├── routes/             # API routes
-│   ├── middleware/         # Custom middleware
-│   ├── utils/              # Utility functions
-│   ├── server.js           # Main server file
-│   └── package.json        # Server dependencies
-└── README.md               # Project documentation
-```
+## Technologies Used
+|Category      |Technology                    |Description                                                    |
+|--------------|------------------------------|---------------------------------------------------------------|
+|Frontend      |React                         |Component-based UI development.                                |
+|State/Routing |React Router DOM & Context API|Client-side routing and global authentication state management.|
+|Styling       |Tailwind CSS                  |Utility-first CSS framework for rapid styling.                 |
+|Build Tool    |Vite                          |Next-generation frontend tooling for faster development.       |
+|Backend       |Node.js & Express             |Fast, unopinionated backend framework.                         |
+|Database      |MongoDB & Mongoose            |NoSQL database with an object data modeling (ODM) layer.       |
+|Authentication|JWT & bcrypt                  |Secure user sessions and password hashing.                     |
 
 ## Getting Started
+Follow these steps to get your local development environment running.
+- Prerequisites
+- .js (LTS recommended)
+- npm (or yarn)
+- MongoDB Atlas Account (or local MongoDB installation)
 
-1. Accept the GitHub Classroom assignment invitation
-2. Clone your personal repository that was created by GitHub Classroom
-3. Follow the setup instructions in the `Week4-Assignment.md` file
-4. Complete the tasks outlined in the assignment
+1. Clone the RepositoryBashgit clone <YOUR_REPO_URL>
+cd mern-blog-project
+2. Environment VariablesCreate a file named .env in the root of the /server directory and add your configuration details:# .env (in the /server folder)
+NODE_ENV=development
+PORT=5000
+MONGO_URI=<YOUR_MONGO_DB_CONNECTION_STRING>
+JWT_SECRET=<YOUR_LONG_RANDOM_SECRET_STRING>
+3. Install DependenciesInstall dependencies for both the client and server:Bash# Install Server dependencies
+cd server
+npm install
 
-## Files Included
+### Install Client dependencies
+cd ../client
+npm install
 
-- `Week4-Assignment.md`: Detailed assignment instructions
-- Starter code for both client and server:
-  - Basic project structure
-  - Configuration files
-  - Sample models and components
+### Return to the server directory for combined run
+cd ..\server
+4. Seed the Database (Initial Data)Run the seeder script to populate your database with initial categories:Bashnpm run data:import
+5. Create Uploads FolderManually create an empty folder named uploads inside the /server directory to store image files.6. Run the ApplicationExecute the combined development script from the /server folder:Bashnpm run dev
+The application will launch both the back-end (on port 5000) and the front-end (on port 5173 or similar). Open your browser to the client URL provided by Vite (e.g., http://localhost:5173/).
 
-## Requirements
+## Deployment
+This application is set up for a common deployment strategy:
 
-- Node.js (v18 or higher)
-- MongoDB (local installation or Atlas account)
-- npm or yarn
-- Git
-
-## Submission
-
-Your work will be automatically submitted when you push to your GitHub Classroom repository. Make sure to:
-
-1. Complete both the client and server portions of the application
-2. Implement all required API endpoints
-3. Create the necessary React components and hooks
-4. Document your API and setup process in the README.md
-5. Include screenshots of your working application
-
-## Resources
-
-- [MongoDB Documentation](https://docs.mongodb.com/)
-- [Express.js Documentation](https://expressjs.com/)
-- [React Documentation](https://react.dev/)
-- [Node.js Documentation](https://nodejs.org/en/docs/)
-- [Mongoose Documentation](https://mongoosejs.com/docs/) 
+Component,                Recommended Service,            Strategy
+Frontend (React),         Vercel / Netlify,               Build and serve static files.
+Backend (Node/Express),   Render / Railway,               Continuous deployment of the Node.js API.
+Database (MongoDB),       MongoDB Atlas,                  Hosted NoSQL database service.
