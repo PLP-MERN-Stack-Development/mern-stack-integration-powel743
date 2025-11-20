@@ -41,3 +41,4 @@ export const AuthProvider = ({ children }) => {
 export const useAuth = () => {
   return useContext(AuthContext);
 };
+// End of /client/src/context/AuthContext.jsx
