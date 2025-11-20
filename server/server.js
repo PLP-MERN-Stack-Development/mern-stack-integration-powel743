@@ -2,9 +2,9 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import path from 'path';
-import helmet from 'helmet';             // 🔒 Security Headers
-import compression from 'compression';   // 🚀 Gzip Compression
-import cookieParser from 'cookie-parser';// 🍪 For handling JWT cookies
+import helmet from 'helmet';             // Security Headers
+import compression from 'compression';   //  Gzip Compression
+import cookieParser from 'cookie-parser';// For handling JWT cookies
 import connectDB from './config/db.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import postRoutes from './routes/postRoutes.js';
@@ -20,7 +20,7 @@ connectDB();
 
 const app = express();
 
-// --- 🛡️ PRODUCTION MIDDLEWARE START ---
+// ---  PRODUCTION MIDDLEWARE START ---
 
 // 1. Security Headers
 // crossOriginResourcePolicy: "cross-origin" allows your frontend to load images from /uploads
