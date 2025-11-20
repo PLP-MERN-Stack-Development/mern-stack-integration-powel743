@@ -12,7 +12,7 @@ function App() {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="flex-grow p-4 container mx-auto">
+      <main className="flex-grow:1 p-4 container mx-auto">
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<PostList />} />
